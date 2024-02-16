@@ -127,10 +127,9 @@ justify-content: center;
     font-size: .7em;
     font-weight: 500;
     color:#fffefe;
-    text-shadow:#530707 2px 2px 5px ;
     width: 7em;
     
-    background-color: #ff5959;
+    background-color: #f14b4b;
     padding:1rem 0.5rem;
     cursor: pointer;
     &:hover {
