@@ -50,11 +50,11 @@ export const Home = () => {
         <form onSubmit={(event)=>event.preventDefault()}>
               <Input inputType='email' 
               onChange={(event)=>setEmail(event.target.value)}
-              avatar={userAvatar} placeholderText='Entre com seu e-mail' imageText='userIcon'/>
+              avatar={userAvatar} placeholderText='E-mail' imageText='userIcon'/>
              
               <Input inputType='password'
               onChange={(event)=>setPassword(event.target.value)}
-              avatar={key} placeholderText='Senha' imageText='keyIcon'/>
+              avatar={key} placeholderText='****' imageText='keyIcon'/>
               <Button text='ENTRAR' color='#233327' bg='#2DC74F' 
               onClick={handleClick}/>
           </form>

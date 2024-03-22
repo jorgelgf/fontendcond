@@ -52,12 +52,15 @@ align-items: center;
 justify-content: center;
 height: auto;
 flex-direction: column;
+
+
 `
 const Session = styled.div`
 width: 90%;
 display: flex;
 height: auto;
 flex-direction:column;
+max-width: 800px;
 `
 const Item = styled.div`
 //border: solid;
