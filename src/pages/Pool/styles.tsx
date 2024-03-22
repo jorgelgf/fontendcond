@@ -14,19 +14,6 @@ z-index: 0;
     opacity: 1;
   }}
 `
-
-export const Back = styled.div`
-position: fixed;
-bottom:2rem;
-right:0;
-width: 15%;
-z-index: 0;
-
-
-@media(min-height:1050px){
-  top:10rem;
-}
-`
 export const DivCalendar = styled.div`
 
 //border: solid black;

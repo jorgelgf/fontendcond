@@ -1,12 +1,13 @@
 
 
 import axios, {AxiosError} from 'axios';
-//import { parseCookies } from 'nookies';
 import { AuthTokenError } from './erros/AuthTokenError';
 import { SignOut } from '../context/AuthContext';
 export function setupApiClient(ctx = undefined){
 
   //let cookies = parseCookies(ctx);
+  //url api cloud = https://backendcond.vercel.app/
+  //url api localhost = http://localhost:5173/
   const api = axios.create({
     baseURL:"https://backendcond.vercel.app/",
     headers:{

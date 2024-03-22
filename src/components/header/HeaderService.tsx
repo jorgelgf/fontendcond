@@ -8,10 +8,10 @@ export const HeaderService = ({children,image,text}:HeaderServiceProps) => {
   return (
   <>
      <S.DivHeaderService>
-      <div>
-     <img src={image} alt={text} />
-     </div>
-     {children}
+            <div>
+               <img src={image} alt={text} />
+            </div>
+            {children}
      </S.DivHeaderService>
   </>
   )

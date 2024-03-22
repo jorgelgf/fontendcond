@@ -1,12 +1,11 @@
 //import { destroyCookie, setCookie} from 'nookies';
 import { createContext,ReactNode,useState } from 'react';
-import { api } from '../services/apiClient';
+import { api } from '../Fetch/apiClient';
 import { toast } from 'react-toastify';
 
 
 type AuthContextData = {
 user:UserProps;
-isAuthenticated: boolean;
 SigIn: (credentials:SignInProps) => Promise<void>;
 SignOut: ()=>void;
 Register:({id,date}:RegisterProps) => void
@@ -38,17 +37,14 @@ type InfoProps={
 export const AuthContext = createContext({} as AuthContextData)
 
 export function SignOut(){
-      try{
-     // destroyCookie(undefined,'@auth.token')
-      }catch(error){
-       //  console.log("Erro ao deslogar ",error)
-      }
+  
+localStorage.clear();
 }
 
 
 export function AuthProvider( {children}:AuthProviderProps){
+
 const [user,setUser] = useState({} as UserProps)
-const isAuthenticated = !!user.name;
 
 async function Register({id,date}:RegisterProps){
       const allRegister = await api.get("register/all")
@@ -70,31 +66,38 @@ async function Register({id,date}:RegisterProps){
     }
 
 async function SigIn({email,password}:SignInProps){
-
-
   if(email==='' || password ===''){
     return
   }
+  let response;
       try{ 
-        const response = await api.post('login',{email,password})
+       response = await api.post('login',{email,password})
+
         const {token} = response.data;
+        localStorage.setItem('token',token)
+        localStorage.setItem('id',response.data.id) 
+        localStorage.setItem('house',response.data.house) 
+        localStorage.setItem('role',response.data.role) 
+        localStorage.setItem('name',response.data.name)
+      
         setUser({
-              id:response.data.id,
+              id:`${localStorage.getItem('id')}`,
               email:response.data.email,
-              name:response.data.name,
-              house:response.data.house,
-              role:response.data.role,
+              name:`${localStorage.getItem('name')}`,
+              house:`${localStorage.getItem('house')}`,
+              role:`${Number(localStorage.getItem('role'))}`,
         })
 
-        api.defaults.headers['Authorization'] = `Bearer ${token}`;
-
+        api.defaults.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+          localStorage.setItem("auth","true")
       }catch(err){
         toast.warning("Errou sua credencial",{autoClose: 1000})
         console.log("Erro ao acessar ",err)
         }
+        
 }
 
-return<AuthContext.Provider value={{user, isAuthenticated,SigIn,SignOut,Register}}>
+return<AuthContext.Provider value={{user,SigIn,SignOut,Register}}>
           {children} 
       </AuthContext.Provider>
 

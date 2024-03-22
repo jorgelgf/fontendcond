@@ -12,8 +12,12 @@ export const Input = ({avatar,imageText,placeholderText,inputType,...props}:Inpu
   return (
     <S.Container>
         {!validator &&<S.DivAvatar><img src={avatar} alt={imageText}/></S.DivAvatar>}
-        <S.InputComponent {...props} type={inputType} placeholder={placeholderText} 
-        onClick={()=>setValidator(false)}/>
+            <S.InputComponent 
+                {...props} 
+                type={inputType} 
+                placeholder={placeholderText} 
+                onClick={()=>setValidator(false)}
+            />
      </S.Container>
   )
 }

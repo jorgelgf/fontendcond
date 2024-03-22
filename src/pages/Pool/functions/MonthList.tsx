@@ -33,11 +33,10 @@ let filterNextMonth:MonthItem|undefined
 
   (monthList===11)?
   filterNextMonth = list.find((i)=>i.index === 0):
-  filterNextMonth = list.find((i)=>i.index === monthList+1)
+  filterNextMonth = list.find((i)=>i.index === monthList+1);
 
    const filterMonth = list.find((i)=> i.index ===monthList)
- 
-return<>
+ return<>
         <span>{filterMonth?.m} / {filterNextMonth?.m}</span>
-     </>
+      </>
 }

@@ -1,14 +1,14 @@
 import { Button, HeaderService,ModalAgree } from '../../components'
 import pool from '../../img/pool.png'
 import { useNavigate } from 'react-router-dom'
-import { useState,useContext, useEffect } from 'react'
+import { useState,useContext } from 'react'
 import Calendar from 'react-calendar'
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthContext';
-import { api } from '../../services/apiClient'
+import { api } from '../../Fetch/apiClient'
 import { MonthList } from './functions/MonthList'
 import * as S from './styles'
-
+import * as GS from '../globalStyles'
 interface UsersProps{
     email:string,
     name:string,
@@ -20,9 +20,6 @@ interface RegisterProps{
     id:string,
     info:string
     user_id:string
-}
-interface userListProps{
-  data:UsersProps[] | undefined
 }
 
 type RegisterUserType={
@@ -43,38 +40,11 @@ export const Pool = () => {
   const [registerUser, setRegisterUser] = useState<RegUserProps>()
   const[info,setInfo] = useState('')
   const nav = useNavigate()  
-
   const{user,Register} = useContext(AuthContext)
-  const date = new Date()
   
+  const date = new Date()
 
-  useEffect(()=>{
-    if (user.name===undefined){
-      toast.warning('Favor entrar novamente!')
-      return nav('/')
-     }
-
-    const allUsers =async () => {
-      const data:userListProps = await api.get('list') 
-      return setUsers(data.data);
-    }
-    const allRegisters = async () =>{
-      const {data} = await api.get('register/all')
-      return setRegister(data)
-    }
-    const allRegisterUser = async () =>{
-    const  id_user = '8bb4c227-8601-4830-b497-dee2bb10b2b5'
-    const {data} = await api.post(`/register/user/?id_user=${id_user}`)
-    setRegisterUser(data)
-    }
-
-    allUsers();
-    allRegisters();
-    allRegisterUser();
-    },[nav, user.name])
-
-
-  const  handleSave = async()=>{
+   const  handleSave = async()=>{
     const data = {
       date:info,id:user.id
     }
@@ -107,43 +77,81 @@ export const Pool = () => {
         toast.warning(`Erro gerado: ${e}`,{autoClose:1500})
     }
   }
-  const handleClickSchedule =()=>{
+
+  const handleClickSchedule =async()=>{
     setScheduler(true);
     setConsult(false);
-    
-  }
+          try{
+            const  id_user = localStorage.getItem("id");
+            const {data} = await api.post(`register/user/?id_user=${id_user}`,null,{
+              headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+              }
+            })
+            setRegisterUser(data)
+            
 
-    const handleClickConsult = ()=>{
+          }catch(error){
+            console.log("error schedule ", error)
+       }}
+
+    const handleClickConsult = async ()=>{
       setConsult(true);
       setScheduler(false);
+            try{
+
+              const {data} = await api.get('register/all',{
+            headers:{
+              'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }    
+          })
+          setRegister(data)
+        }catch(error){
+          console.log(error)
+          }
+
+       try{
+         const  dataUSer = await api.get('list',{
+            headers:{
+              'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+          }
+          ) 
+          return setUsers(dataUSer.data);
+        }catch(error){
+      console.log("entrou neste erro1")
+        }
     }
 
-    const handleClickCalendar = (e:any)=>{
+    const handleClickCalendar = ()=>{
           setModalOkay(true)
-          const data = new Date(e)
+          const data = new Date()
           setInfo(data.toLocaleDateString())
             }
     
     const handleClickDelete  = (id:string) =>{
-      localStorage.setItem('id',id)
+      localStorage.setItem("idRegister",id)
       setModalDelete(true)
         }
 
     const handleKill = async() =>{
-      const id = localStorage.getItem('id')
       try{
-       await api.delete(`/register/remove/?id=${id}`)
+       await api.delete(`/register/remove/?id=${localStorage.getItem("idRegister")}`,{
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+       })
     }catch(erro){
       console.log(erro)
     }finally{
       setModalDelete(false)
-      localStorage.clear()
       nav('/service')
       toast.success('Dia desmarcado',{autoClose:1500})
     }
 
     }
-  const showRegisters = () =>{
+/*Information structure*/
+ const showRegisters = () =>{
     return <>{
       register &&
       <S.DivConsult>
@@ -158,11 +166,13 @@ export const Pool = () => {
         <span className='day'>DIA</span>
       </div>
   </div>
+  
      {register.map((item,i:number)=>{
     const userFilter =  users?.find((u) => u.id === item.user_id);
+    
     return <div key={i}>
              <div className='spaceBetween'>
-                <span>{userFilter?.house || "Casa não identificada"}</span>
+                <span>{userFilter?.house || "..."}</span>
                 
                 {
                     user.role==='2'? 
@@ -193,6 +203,7 @@ export const Pool = () => {
   }
          return (
       <>
+      {/*Modal structure*/ }
       {modalOkay && 
        <S.DivOpacity onClick={()=>setModalOkay(false)}>
           <ModalAgree 
@@ -210,12 +221,16 @@ export const Pool = () => {
           onClickYes={handleKill}/>
        </S.DivOpacity>}
         <HeaderService image={pool} text='pool-icon'children='ÁREA DE LAZER'/>
-    
+        <div
+        style={{
+          marginBottom:'1.5rem'
+        }}>
+        <Button text=' ↻ ATUALIZAR' bg='#69e059' color="#222422" onClick={()=>{return nav('/service')}}/> 
+        </div>
     <S.Container>
-        <Button text='AGENDAR' onClick={handleClickSchedule} bg='#9cf3a0' color="#222422"/>
+        <Button text='AGENDAR' onClick={handleClickSchedule} bg='#f5f4b3' color="#1b1d0d"/>
         <Button text='CONSULTAR' onClick={handleClickConsult}bg='#9cf3f3' color="#1f2020"/>
     </S.Container>
-    
 
     {/*scheduling structure*/}
     {scheduler && <S.DivCalendar> 
@@ -234,9 +249,9 @@ export const Pool = () => {
             </div>
       </S.DivCalendar>}
     {consult   &&  showRegisters() }
-    <S.Back>    
+    <GS.Exit>    
         <Button onClick={()=> nav('/service')} text='<' bg='#eeedac9b' color='#0000009b'></Button>
-    </S.Back>
+    </GS.Exit>
     </>
   )
 }

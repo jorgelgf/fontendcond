@@ -5,7 +5,6 @@ interface PropsModalAgree{
   onClickNo?:()=>void;
   text?:string;
 }
-
 export const ModalAgree = ({onClickYes,onClickNo,text}:PropsModalAgree) => {
   return (
     <S.Container >
