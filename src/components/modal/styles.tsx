@@ -15,9 +15,7 @@ export const Container = styled.div`
   padding: 2rem;
   display: flex;
   flex-direction:column;
-  
-
-  
+  color: black;
   .dv{
     margin-top: 1rem;
     background-color: #221f1f;
