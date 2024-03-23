@@ -4,7 +4,6 @@ import { styled } from 'styled-components';
 //-- MainHeader
 export const Container  = styled.header`
 width: 100%;
-padding:0;
 cursor: pointer;
 header{
 display: flex;
@@ -36,11 +35,7 @@ div{
 }
 }
 `
-//-- MainHeader
-
-
 //HeaderService
-
 export const DivHeaderService = styled.div`
 width: 100%;
 display: flex;

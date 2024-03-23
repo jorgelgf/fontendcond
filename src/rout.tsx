@@ -15,10 +15,23 @@ useEffect(()=>{
   window.scrollTo(0, 0);
 
 },[])
+
   return (
     <>
       <Container>
-        <Session>
+       <DivBG>
+       <Black onClick={()=>{
+                document.body.style.backgroundColor='#4d4848';
+                document.body.style.color='white';
+          }}>
+        </Black>
+       <White onClick={()=>{
+                document.body.style.backgroundColor='white';
+                document.body.style.color='black';
+        }
+       }>
+      </White>
+      </DivBG>         <Session>
         <MainHeader/>
         <Item>
           {children}
@@ -52,8 +65,30 @@ align-items: center;
 justify-content: center;
 height: auto;
 flex-direction: column;
+`
+const DivBG = styled.div`
+   display:flex;
+   width:100%; 
+   justify-content:flex-end; 
+   position: absolute;
+   top:0;
+   padding-top: 1rem;
+   padding-right: 2rem;
 
-
+`
+const Black = styled.div`
+background-color: black;
+border:solid black;
+width: 5vw;
+height: 3vw;
+cursor: pointer;
+`
+const White  = styled.div`
+background-color: white;
+border:solid black;
+width: 5vw;
+height: 3vw;
+cursor: pointer;
 `
 const Session = styled.div`
 width: 90%;
@@ -63,7 +98,6 @@ flex-direction:column;
 max-width: 800px;
 `
 const Item = styled.div`
-//border: solid;
 width: 100%;
 height: 100vh;
 margin-top: 4rem;
