@@ -40,13 +40,14 @@ export const Pool = () => {
   const [registerUser, setRegisterUser] = useState<RegUserProps>()
   const[info,setInfo] = useState('')
   const nav = useNavigate()  
-  const{user,Register} = useContext(AuthContext)
+  const{Register} = useContext(AuthContext)
   
   const date = new Date()
 
    const  handleSave = async()=>{
+    console.log('localstorage', localStorage.getItem('id'))
     const data = {
-      date:info,id:user.id
+      date:info,id:`${localStorage.getItem('id')}`
     }
 
     try {
@@ -107,7 +108,7 @@ export const Pool = () => {
           })
           setRegister(data)
         }catch(error){
-          console.log(error)
+          console.log('meu erro está aqui: ',error)
           }
 
        try{
@@ -123,10 +124,10 @@ export const Pool = () => {
         }
     }
 
-    const handleClickCalendar = ()=>{
+    const handleClickCalendar = (e:any)=>{
+      
           setModalOkay(true)
-          const data = new Date()
-          setInfo(data.toLocaleDateString())
+          setInfo(e.toLocaleDateString())
             }
     
     const handleClickDelete  = (id:string) =>{
@@ -166,19 +167,17 @@ export const Pool = () => {
         <span className='day'>DIA</span>
       </div>
   </div>
-  
-     {register.map((item,i:number)=>{
+     {register?.map((item,i:number)=>{
     const userFilter =  users?.find((u) => u.id === item.user_id);
-    
     return <div key={i}>
              <div className='spaceBetween'>
                 <span>{userFilter?.house || "..."}</span>
                 
                 {
-                    user.role==='2'? 
+                    `${localStorage.getItem('role')}`==='2'? 
                       <span className='spanTrash'><div className='trash'onClick={()=>handleClickDelete(item.id)}>DESMARCAR</div></span> : 
                    <>
-                    {userFilter?.id ===user.id && 
+                    {userFilter?.id ===`${localStorage.getItem('id')}`&& 
                      <span className='spanTrash'>
                     <div className='trash' 
                     onClick={()=>handleClickDelete(item.id)}>DESMARCAR</div></span>}

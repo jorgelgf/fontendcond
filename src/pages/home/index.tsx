@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import { useContext,  useEffect,  useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Footer } from '../../components/footer';
+
+
 export const Home = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const {SigIn,SignOut, user} = useContext(AuthContext)
@@ -28,8 +30,8 @@ export const Home = () => {
           toast.warning("Errou sua credencial",{autoClose: 1000})
             console.log('erro:', e)
             SignOut();
-          }finally{
-    }
+          }
+
   }
 
   //validation private router

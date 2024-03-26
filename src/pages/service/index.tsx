@@ -33,13 +33,11 @@ useEffect(()=>{
     }, 2000);
     }
     LoadingNow()
-
-    if(localStorage.getItem('auth')==='false'|| localStorage.getItem('auth')===null ){
-      nav('/')
-    }
+        if(localStorage.getItem('auth')==='false'|| localStorage.getItem('auth')===null ){
+          nav('/')
+        }
 
 },[nav])
-
   return (
     <>{loadingDiv ?<Loading/>:
     <S.Container>

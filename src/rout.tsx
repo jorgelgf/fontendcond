@@ -13,6 +13,7 @@ interface ChildrenProps{
 const Layout = ({children}:ChildrenProps) => {
 useEffect(()=>{
   window.scrollTo(0, 0);
+  
 
 },[])
 
@@ -20,17 +21,20 @@ useEffect(()=>{
     <>
       <Container>
        <DivBG>
+       
        <Black onClick={()=>{
                 document.body.style.backgroundColor='#4d4848';
                 document.body.style.color='white';
           }}>
         </Black>
+        
        <White onClick={()=>{
                 document.body.style.backgroundColor='white';
                 document.body.style.color='black';
         }
        }>
       </White>
+
       </DivBG>         <Session>
         <MainHeader/>
         <Item>
