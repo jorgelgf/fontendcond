@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactNode, useEffect } from 'react';
-import {Consult, Contact, Home, Pool, Service} from './pages';
+import {Consult, Contact, Home, Grill, Service} from './pages';
 import {MainHeader} from './components';
 
 
@@ -54,7 +54,7 @@ const Rout = () => {
     <Routes>
       <Route path="/" element={<Layout><Home/></Layout>} />
       <Route path='/service' element={<Layout><Service/></Layout>}/>
-      <Route path='/pool' element={<Layout><Pool/></Layout>}/>
+      <Route path='/grill' element={<Layout><Grill/></Layout>}/>
       <Route path='/consult' element={<Layout><Consult/></Layout>}/>
       <Route path='/contact' element={<Layout><Contact/></Layout>}/>
     </Routes>

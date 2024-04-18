@@ -41,7 +41,7 @@ useEffect(()=>{
   return (
     <>{loadingDiv ?<Loading/>:
     <S.Container>
-          <Button onClick={()=>nav('/pool')} text='ÁREA DE LAZER' bg='#85edf5'/>
+          <Button onClick={()=>nav('/grill')} text='RESERVAR ESPAÇO' bg='#85edf5'/>
           <Button text='CONSULTAR REGRAS'onClick={()=>nav('/consult')} bg='#eef585'/>
           <Button text='SOLICITAÇÃO DE APOIO' onClick={()=>nav('/contact')}bg='#f5d785'/>
           <GS.Exit>

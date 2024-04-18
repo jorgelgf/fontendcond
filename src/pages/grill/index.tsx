@@ -1,5 +1,5 @@
 import { Button, HeaderService,ModalAgree } from '../../components'
-import pool from '../../img/pool.png'
+import grill from '../../img/grill.png'
 import { useNavigate } from 'react-router-dom'
 import { useState,useContext } from 'react'
 import Calendar from 'react-calendar'
@@ -30,7 +30,7 @@ interface RegUserProps{
 }
 
 
-export const Pool = () => {
+export const Grill = () => {
   const [scheduler, setScheduler] = useState(false)
   const [consult, setConsult] = useState(false)
   const [modalOkay, setModalOkay] = useState(false)
@@ -45,7 +45,6 @@ export const Pool = () => {
   const date = new Date()
 
    const  handleSave = async()=>{
-    console.log('localstorage', localStorage.getItem('id'))
     const data = {
       date:info,id:`${localStorage.getItem('id')}`
     }
@@ -120,24 +119,23 @@ export const Pool = () => {
           ) 
           return setUsers(dataUSer.data);
         }catch(error){
-      console.log("entrou neste erro1")
+      console.log("entrou neste erro1", error)
         }
     }
 
     const handleClickCalendar = (e:any)=>{
-      
           setModalOkay(true)
           setInfo(e.toLocaleDateString())
             }
     
-    const handleClickDelete  = (id:string) =>{
-      localStorage.setItem("idRegister",id)
+    const handleClickDelete  = (id_register:string) =>{
+      localStorage.setItem("idRegister",id_register)
       setModalDelete(true)
         }
 
     const handleKill = async() =>{
       try{
-       await api.delete(`/register/remove/?id=${localStorage.getItem("idRegister")}`,{
+       await api.delete(`/register/remove/?id_=${localStorage.getItem("idRegister")}`,{
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -219,7 +217,7 @@ export const Pool = () => {
             toast.warning("Não deletado!",{autoClose: 1000})}} 
           onClickYes={handleKill}/>
        </S.DivOpacity>}
-        <HeaderService image={pool} text='pool-icon'children='ÁREA DE LAZER'/>
+        <HeaderService image={grill} text='grill-icon'children='RESERVAR ESPAÇO'/>
         <div
         style={{
           marginBottom:'1.5rem'
