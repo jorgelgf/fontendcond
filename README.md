@@ -14,6 +14,4 @@ Clique <a href="https://frontendcond.vercel.app/" target="_blank">Aqui</a> para 
 ### Tela de seleção de serviço
 <img src="https://i.ibb.co/dPgT6R9/2.png" alt="imagem de seleção de serviços"/>
 
-### Agendamento e consulta de serviços
-<img src="https://r2.easyimg.io/sq54gz84c/tela3.png"/>
-<img src="https://r2.easyimg.io/kkjvk4tyr/tela4.png"/>
+Demonstração de operação em vídeo <a href="https://www.linkedin.com/posts/jorgelgf_frontend-backend-prisma-activity-7197316863586897921-rosh?utm_source=share&utm_medium=member_desktop" target="_blank">aqui!</a>
