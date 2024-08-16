@@ -9,10 +9,10 @@ Clique <a href="https://frontendcond.vercel.app/" target="_blank">Aqui</a> para 
 
 
 ### Tela de login
-<img src='https://r2.easyimg.io/mky4g3szu/tela1.png'/>
+<img src="https://i.ibb.co/26ppGKr/1.png" alt="Tela de login"/>
 
 ### Tela de seleção de serviço
-<img src="https://r2.easyimg.io/1ywbasoes/tela2.png" />
+<img src="https://i.ibb.co/dPgT6R9/2.png" alt="imagem de seleção de serviços"/>
 
 ### Agendamento e consulta de serviços
 <img src="https://r2.easyimg.io/sq54gz84c/tela3.png"/>
